@@ -4,3 +4,4 @@ web_pos="/var/lib/tomcat9/webapps/ROOT/"
 
 sudo cp *.html ${web_pos}
 sudo cp *.jsp ${web_pos}
+sudo cp *.png ${web_pos}

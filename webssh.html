@@ -37,7 +37,7 @@ iframe {
     opacity: 0.89;
     position: fixed;
     top: 0;
-    left: -96%;
+    left: -99.5%;
     width: 100%;
     transition: all ease 0.5s 0s;
     opacity: 0.3;
@@ -48,18 +48,21 @@ iframe {
     background: #343434;
     color: #dadada;
     opacity: 1;
+    width: 40%;
 }
 button {
     background: #787878;
     color: #fff;
     border: none;
     border-radius: 0.1cm;
+    padding: 4px;
 }
 input {
     background: #444444;
-    color: #f6f;
+    color: #fff;
     border-width: 0px 0px 2px 0px;
     border-color: #dadada;
+    width: 50%;
     border-style: solid;
 }
 </style>
@@ -112,26 +115,29 @@ function paste() {
 }
 function ch_opacity() {
     var ifm = document.getElementById("ifm");
-    opa = prompt("the panel opacity:", getComputedStyle(ifm, null)["opacity"] + "");
-    ifm.style.opacity = opa;
+    opa = prompt("the panel opacity and bg url:", getComputedStyle(ifm, null)["opacity"] + " " + document.getElementById("bgi").src);
+    opa = opa.split(" ");
+    //alert(opa);
+    ifm.style.opacity = opa[0];
+    document.getElementById("bgi").src = opa[1];
 }
 
 </script>
 </head>
 <body>
-<img id="bgi" style="width: 100%; z-index: -30; position: fixed; left: 0; top: 0;" id="bg" src="https://static3.srcdn.com/wordpress/wp-content/uploads/2020/10/Star-Wars-Squadrons-Imperial-Ship.jpg" />
-<div class="menu" style="z-index: 60; padding: 0.3cm; border: #FF00FF 0px solid; width: 96%; height: auto; margin: 0 auto;">
+<img id="bgi" style="width: 100%; z-index: -30; position: fixed; left: 0; top: 0;" src="./cups.png" />
+<div class="menu" style="z-index: 60; padding: 0.3cm; border: #FF00FF 0px solid; height: auto; margin: 0 auto;">
 	<input id="ssh_url" value="https://github.com" />
     <button onclick="go()">Go</button>
     <button onclick="fresh()">Fresh</button>
     <button onclick="paste()">Paste</button>
-    <button onclick="ch_opacity()">Opacity</button>
+    <button onclick="ch_opacity()">Opacity and Bg</button>
 	<span style="float: right;">:</span>
 </div>
 <div class="iwindow">
     <iframe id="ifm" src="https://github.com"></iframe>
 </div>
-<div class="maot" style="margin-top: 0px;">hello, guys.</div>
+<div class="maot" style="margin-top: 0px;">SHELL IN A BOX</div>
 <script>
 function runs() {
     var win0 = document.getElementsByClassName("maot")[0];
