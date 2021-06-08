@@ -14,14 +14,18 @@ iframe {
 }
 #ifm {
     opacity: 0.78;
+    overflow: hidden;
+    /*transform: scaleX(1.5);*/
+    /*transform-origin: left;*/
+    cursor: crosshair;
 }
 .iwindow {
     margin-left: auto;
     margin-right: auto;
     width: 99%;
     height: 900px;
-    margin-top: 0.2cm;
-    margin-bottom: 0.2cm;
+    margin-top: 0;
+    margin-bottom: 0;
     background: none;
     position: fixed;
     top: 0px;
@@ -36,12 +40,14 @@ iframe {
     left: -96%;
     width: 100%;
     transition: all ease 0.5s 0s;
+    opacity: 0.3;
 }
 .menu:hover {
     border-radius: 0.03cm;
     left: 0%;
     background: #343434;
     color: #dadada;
+    opacity: 1;
 }
 button {
     background: #787878;
@@ -80,10 +86,10 @@ function fresh() {
         var ifm = document.getElementById("ifm");
 
         var win0 = document.getElementsByClassName("iwindow")[0];
-        var tp = 12;
-        var lf = 15;
-        win0.style.height = parseInt(window.innerHeight * 0.97 - tp) + "px";
-        win0.style.width = parseInt(window.innerWidth * 0.97 - lf) + "px";
+        var tp = 0;
+        var lf = 0;
+        win0.style.height = parseInt(window.innerHeight - tp) + "px";
+        win0.style.width = parseInt(window.innerWidth - lf) + "px";
         win0.style.left = lf + "px";
         win0.style.top = tp + "px";
         var bgi = document.getElementById("bgi"); 
@@ -112,8 +118,7 @@ function ch_opacity() {
 
 </script>
 </head>
-<body style="height: 8000px;">
-
+<body>
 <img id="bgi" style="width: 100%; z-index: -30; position: fixed; left: 0; top: 0;" id="bg" src="https://static3.srcdn.com/wordpress/wp-content/uploads/2020/10/Star-Wars-Squadrons-Imperial-Ship.jpg" />
 <div class="menu" style="z-index: 60; padding: 0.3cm; border: #FF00FF 0px solid; width: 96%; height: auto; margin: 0 auto;">
 	<input id="ssh_url" value="http://1.13.14.246:8080/files" />
@@ -126,16 +131,17 @@ function ch_opacity() {
 <div class="iwindow">
     <iframe id="ifm" src="http://1.13.14.246:8080/files"></iframe>
 </div>
-<div class="maot" style="margin-top: 3000px;">hello, guys.</div>
+<div class="maot" style="margin-top: 0px;">hello, guys.</div>
 <script>
-	function runs() {
-		var win0 = document.getElementsByClassName("maot")[0];
-		win0.scrollIntoView();
-	}
-    document.body.onload = function() {
-		fresh();
-		setInterval(runs, 3000);
-	}
+function runs() {
+    var win0 = document.getElementsByClassName("maot")[0];
+    win0.scrollIntoView();
+}
+
+document.body.onload = function() {
+    fresh();
+    setInterval(runs, 3000);
+}
 </script>
 </body>
 </html>

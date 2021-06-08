@@ -1,3 +1,6 @@
-sudo cp *.html /var/lib/tomcat9/webapps/ROOT/
 
-sudo cp *.jsp /var/lib/tomcat9/webapps/ROOT/
+web_pos="/var/lib/tomcat9/webapps/ROOT/"
+# change it compatible with your system.
+
+sudo cp *.html ${web_pos}
+sudo cp *.jsp ${web_pos}
