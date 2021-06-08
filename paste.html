@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>    
+<title>Paste from here</title>
+<style>
+    textarea {
+        width: 100%;
+        height: 100%;
+        resize: none;
+    }
+    .button {
+        background: rgba(74, 74, 74, 199);
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        padding: 3px;
+    }
+</style>
+</head>
+<body>
+<form id="f1" action="paste.jsp"></form>
+<div id="mf" style="width: 70%; margin-left: auto; margin-right: auto;">
+<textarea name="paste" form="f1"></textarea>
+</div>
+<br />
+<div style="width: 40%; margin-left: auto; margin-right: auto;">
+<input class="button" style="width: 100%;" value="OK" form="f1" type="submit" />
+</div>
+<script>
+    document.body.onload = function() {
+        document.getElementById("mf").style.height = parseInt(window.innerHeight * 0.75) + "px";
+    }
+</script>
+</body>
+</html>

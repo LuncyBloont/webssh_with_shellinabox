@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<title>ssh web tool with shellinabox</title>
+<style>
+iframe {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0.89;
+    border: none;
+    /*filter: invert(0%) hue-rotate(0deg) brightness(100%) saturate(100%);*/
+}
+#ifm {
+    opacity: 0.78;
+}
+.iwindow {
+    margin-left: auto;
+    margin-right: auto;
+    width: 99%;
+    height: 900px;
+    margin-top: 0.2cm;
+    margin-bottom: 0.2cm;
+    background: none;
+    position: fixed;
+    top: 0px;
+}
+.menu {
+    color: #232323;
+    border-radius: 0.7cm;
+    background: #fff;
+    opacity: 0.89;
+    position: fixed;
+    top: 0;
+    left: -96%;
+    width: 100%;
+    transition: all ease 0.5s 0s;
+}
+.menu:hover {
+    border-radius: 0.03cm;
+    left: 0%;
+    background: #343434;
+    color: #dadada;
+}
+button {
+    background: #787878;
+    color: #fff;
+    border: none;
+    border-radius: 0.1cm;
+}
+input {
+    background: #444444;
+    color: #f6f;
+    border-width: 0px 0px 2px 0px;
+    border-color: #dadada;
+    border-style: solid;
+}
+</style>
+<script>
+function go()
+{
+    // alert("go!");
+    try {
+        var src = document.getElementById("ssh_url").value;
+        var ifm = document.getElementById("ifm");
+        alert("A new page will be open for acceptting the risk! Then back here and fresh if termianl in this page is blank.");
+        window.open(src);
+        ifm.src = src;
+        fresh();
+        // alert("Welcome! Friend.");
+    } catch (err) {
+        alert(err);
+    }
+} 
+
+function fresh() {
+    try {
+        var src = document.getElementById("ssh_url").value;
+        var ifm = document.getElementById("ifm");
+
+        var win0 = document.getElementsByClassName("iwindow")[0];
+        var tp = 12;
+        var lf = 15;
+        win0.style.height = parseInt(window.innerHeight * 0.97 - tp) + "px";
+        win0.style.width = parseInt(window.innerWidth * 0.97 - lf) + "px";
+        win0.style.left = lf + "px";
+        win0.style.top = tp + "px";
+        var bgi = document.getElementById("bgi"); 
+        bgi.style.width = bgi.width / bgi.height > innerWidth / innerHeight ? "auto" : innerWidth + "px";
+        bgi.style.height = bgi.width / bgi.height <= innerWidth / innerHeight ? "auto" : innerHeight + "px";
+        ifm.src = src;
+
+    } catch (er) {
+        alert(er);
+    }
+    // fresh the web view.
+}
+
+function paste() {
+    try {
+        window.open("paste.html");
+    } catch (err) {
+        alert(err);
+    }
+}
+function ch_opacity() {
+    var ifm = document.getElementById("ifm");
+    opa = prompt("the panel opacity:", getComputedStyle(ifm, null)["opacity"] + "");
+    ifm.style.opacity = opa;
+}
+
+</script>
+</head>
+<body style="height: 8000px;">
+
+<img id="bgi" style="width: 100%; z-index: -30; position: fixed; left: 0; top: 0;" id="bg" src="https://static3.srcdn.com/wordpress/wp-content/uploads/2020/10/Star-Wars-Squadrons-Imperial-Ship.jpg" />
+<div class="menu" style="z-index: 60; padding: 0.3cm; border: #FF00FF 0px solid; width: 96%; height: auto; margin: 0 auto;">
+	<input id="ssh_url" value="http://1.13.14.246:8080/files" />
+    <button onclick="go()">Go</button>
+    <button onclick="fresh()">Fresh</button>
+    <button onclick="paste()">Paste</button>
+    <button onclick="ch_opacity()">Opacity</button>
+	<span style="float: right;">:</span>
+</div>
+<div class="iwindow">
+    <iframe id="ifm" src="http://1.13.14.246:8080/files"></iframe>
+</div>
+<div class="maot" style="margin-top: 3000px;">hello, guys.</div>
+<script>
+	function runs() {
+		var win0 = document.getElementsByClassName("maot")[0];
+		win0.scrollIntoView();
+	}
+    document.body.onload = function() {
+		fresh();
+		setInterval(runs, 3000);
+	}
+</script>
+</body>
+</html>
