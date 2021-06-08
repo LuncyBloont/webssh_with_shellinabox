@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, 
+    maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <title>ssh web tool with shellinabox</title>
 <style>
 iframe {
@@ -10,6 +11,7 @@ iframe {
     background: #fff;
     opacity: 0.89;
     border: none;
+    /*transform: skewX(9deg);*/
     /*filter: invert(0%) hue-rotate(0deg) brightness(100%) saturate(100%);*/
 }
 #ifm {
@@ -32,7 +34,7 @@ iframe {
 }
 .menu {
     color: #232323;
-    border-radius: 0.7cm;
+    border-radius: 1cm;
     background: #fff;
     opacity: 0.89;
     position: fixed;
@@ -41,6 +43,7 @@ iframe {
     width: 100%;
     transition: all ease 0.5s 0s;
     opacity: 0.3;
+    border: #121212 2px solid;
 }
 .menu:hover {
     border-radius: 0.03cm;
@@ -48,7 +51,8 @@ iframe {
     background: #343434;
     color: #dadada;
     opacity: 1;
-    width: 40%;
+    width: 50%;
+    border: #343434 2px solid;
 }
 button {
     background: #787878;
@@ -56,6 +60,7 @@ button {
     border: none;
     border-radius: 0.1cm;
     padding: 4px;
+    box-shadow: 1px 2px 3px 1px rgba(0, 12, 34, 0.5);
 }
 input {
     background: #444444;
@@ -64,6 +69,8 @@ input {
     border-color: #dadada;
     width: 50%;
     border-style: solid;
+    margin-right: 13px;
+    height: 30px;
 }
 </style>
 <script>
@@ -73,7 +80,8 @@ function go()
     try {
         var src = document.getElementById("ssh_url").value;
         var ifm = document.getElementById("ifm");
-        alert("A new page will be open for acceptting the risk! Then back here and fresh if termianl in this page is blank.");
+        alert("A new page will be open for acceptting the risk!" + 
+            " Then back here and fresh if termianl in this page is blank.");
         window.open(src);
         ifm.src = src;
         fresh();
@@ -83,8 +91,9 @@ function go()
     }
 } 
 
-function fresh() {
+function fresh(urlfresh) {
     try {
+        // alert("RL");
         var src = document.getElementById("ssh_url").value;
         var ifm = document.getElementById("ifm");
 
@@ -96,9 +105,13 @@ function fresh() {
         win0.style.left = lf + "px";
         win0.style.top = tp + "px";
         var bgi = document.getElementById("bgi"); 
-        bgi.style.width = bgi.width / bgi.height > innerWidth / innerHeight ? "auto" : innerWidth + "px";
-        bgi.style.height = bgi.width / bgi.height <= innerWidth / innerHeight ? "auto" : innerHeight + "px";
-        ifm.src = src;
+        bgi.style.width = 
+            bgi.width / bgi.height > innerWidth / innerHeight ? 
+            "auto" : innerWidth + "px";
+        bgi.style.height = 
+            bgi.width / bgi.height <= innerWidth / innerHeight ? 
+            "auto" : innerHeight + "px";
+        if (urlfresh) ifm.src = src;
 
     } catch (er) {
         alert(er);
@@ -115,37 +128,48 @@ function paste() {
 }
 function ch_opacity() {
     var ifm = document.getElementById("ifm");
-    opa = prompt("the panel opacity and bg url:", getComputedStyle(ifm, null)["opacity"] + " " + document.getElementById("bgi").src);
+    opa = prompt("the panel opacity and bg url:", 
+        getComputedStyle(ifm, null)["opacity"] + " " + 
+        document.getElementById("bgi").src);
     opa = opa.split(" ");
     //alert(opa);
     ifm.style.opacity = opa[0];
     document.getElementById("bgi").src = opa[1];
 }
 
+function fllScr() {
+    document.body.requestFullscreen();
+    setTimeout("fresh(false)", 1000);
+}
+
 </script>
 </head>
 <body>
-<img id="bgi" style="width: 100%; z-index: -30; position: fixed; left: 0; top: 0;" src="./cups.png" />
-<div class="menu" style="z-index: 60; padding: 0.3cm; border: #FF00FF 0px solid; height: auto; margin: 0 auto;">
-	<input id="ssh_url" value="https://github.com" />
+<img id="bgi" style="width: 100%; z-index: -30; position: fixed;
+    left: 0; top: 0;" src="./bg0.png" />
+<div class="menu" style="z-index: 60; padding: 0.3cm; 
+    height: auto; margin: 0 auto;">
+	<input id="ssh_url" value="./tip.html" />
     <button onclick="go()">Go</button>
-    <button onclick="fresh()">Fresh</button>
+    <button onclick="fresh(true)">Fresh</button>
     <button onclick="paste()">Paste</button>
     <button onclick="ch_opacity()">Opacity and Bg</button>
-	<span style="float: right;">:</span>
+    <button onclick="fllScr()">FullScreen</button>
+    <span style="float: right;">\<br />/</span>
 </div>
 <div class="iwindow">
-    <iframe id="ifm" src="https://github.com"></iframe>
+    <iframe id="ifm" src="./tip.html"></iframe>
 </div>
 <div class="maot" style="margin-top: 0px;">SHELL IN A BOX</div>
 <script>
 function runs() {
     var win0 = document.getElementsByClassName("maot")[0];
     win0.scrollIntoView();
+    fresh(false);
 }
 
 document.body.onload = function() {
-    fresh();
+    fresh(true);
     setInterval(runs, 3000);
 }
 </script>
